@@ -1,0 +1,45 @@
+{
+  "name": "@myunisoft/typeorm-file-parser",
+  "version": "1.0.0",
+  "description": "TypeORM TypeScript file parser",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MyUnisoft/typeorm-file-parser.git"
+  },
+  "keywords": [
+    "typeorm",
+    "typescript",
+    "file",
+    "parser"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "GENTILHOMME Thomas <gentilhomme.thomas@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MyUnisoft/typeorm-file-parser/issues"
+  },
+  "homepage": "https://github.com/MyUnisoft/typeorm-file-parser#readme",
+  "devDependencies": {
+    "@myunisoft/eslint-config": "^1.4.0",
+    "@types/jest": "^27.0.2",
+    "dotenv": "^10.0.0",
+    "jest": "^27.2.1",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "split2": "^3.2.2"
+  }
+}
