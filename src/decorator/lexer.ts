@@ -14,19 +14,19 @@ const kWordsChar = charSet(
 
   ".", "_", "-", "$"
 );
-const kSymbolsChar = charSet(",", "{", "}");
+const kSymbolsChar = charSet(",", "{", "}", "[", "]");
 
-const kIdentifiers = new Set([
+export const IDENTIFIERS = new Set([
   "Entity",
   "Unique",
   "PrimaryGeneratedColumn",
   "Column",
+  "JoinTable",
+  "JoinColumn",
   "ManyToMany",
   "OneToOne",
   "ManyToOne",
-  "OneToMany",
-  "JoinTable",
-  "JoinColumn"
+  "OneToMany"
 ]);
 
 export const TOKENS = Object.freeze({
@@ -35,7 +35,9 @@ export const TOKENS = Object.freeze({
   SYMBOL: Symbol("Symbol")
 });
 
-export function* tokenize(lineStr: string): IterableIterator<[symbol, string]> {
+export type TokenizerResult = { token: symbol, raw: string };
+
+export function* tokenize(lineStr: string): IterableIterator<TokenizerResult> {
   let currentStr = "";
 
   for (const char of lineStr) {
@@ -45,17 +47,17 @@ export function* tokenize(lineStr: string): IterableIterator<[symbol, string]> {
     }
 
     if (currentStr.length > 0) {
-      if (kIdentifiers.has(currentStr)) {
-        yield [TOKENS.IDENTIFIER, currentStr];
+      if (IDENTIFIERS.has(currentStr)) {
+        yield { token: TOKENS.IDENTIFIER, raw: currentStr };
       }
       else {
-        yield [TOKENS.WORD, currentStr];
+        yield { token: TOKENS.WORD, raw: currentStr };
       }
       currentStr = "";
     }
 
     if (kSymbolsChar.has(char)) {
-      yield [TOKENS.SYMBOL, char];
+      yield { token: TOKENS.SYMBOL, raw: char };
     }
   }
 }

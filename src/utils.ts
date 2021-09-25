@@ -14,3 +14,12 @@ export function charSet(...plages: (string | [number, number])[]): Set<string> {
 
   return ret;
 }
+
+export const END_OF_SEQUENCE = Symbol("EOS");
+export type SEQUENCE_OR_TOKEN<T> = typeof END_OF_SEQUENCE | T;
+
+export function getNextItem<T>(iterator: IterableIterator<T>): SEQUENCE_OR_TOKEN<T> {
+  const item = iterator.next();
+
+  return item.done ? END_OF_SEQUENCE : item.value;
+}

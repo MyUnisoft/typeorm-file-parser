@@ -1,106 +1,45 @@
 // Import Internal Dependencies
 import * as Lexer from "./lexer";
+import { getNextItem, END_OF_SEQUENCE } from "../utils";
+import { ParsingError } from "./errors";
 
-// CONSTANTS
-const kPropertyConvertor = {
-  length: (str) => Number(str),
-  precision: (str) => Number(str),
-  scale: (str) => Number(str),
-  default: (str) => str,
-  type: (str) => str,
-  enum: (str) => str,
-  onDelete: (str) => str,
-  onUpdate: (str) => str,
-  nullable: (str) => str === "true",
-  cascade: (str) => str === "true",
-  array: (str) => str === "true",
-  unique: (str) => str === "true"
-};
+import Unique, { UniqueDecorator } from "./parsers/Unique";
+import Relation, { RelationDecorator } from "./parsers/Relation";
+import Column, { ColumnDecorator } from "./parsers/Column";
 
-export interface TypeORMDecorator {
-  name: string;
-  type?: null | string;
-  table?: string;
-  tableColumn?: string;
-  properties: Record<string, any>;
-  columns?: string[];
-}
+export type TypeORMDecorator =
+  { name: "Entity" | "PrimaryGeneratedColumn" } |
+  UniqueDecorator |
+  RelationDecorator |
+  ColumnDecorator;
 
 export function parseDecorator(lineStr: string): TypeORMDecorator {
-  const decorator: TypeORMDecorator = {
-    name: "",
-    type: null,
-    properties: {}
-  };
-  let enteredInPropertyBlock = false;
-  let currentPropertyName: string | null = null;
-
-  for (const [token, word] of Lexer.tokenize(lineStr)) {
-    if (token === Lexer.TOKENS.IDENTIFIER) {
-      decorator.name = word;
-      if (decorator.name === "Unique") {
-        decorator.columns = [];
-      }
-    }
-
-    if (enteredInPropertyBlock) {
-      if (token !== Lexer.TOKENS.WORD) {
-        continue;
-      }
-
-      if (currentPropertyName === null) {
-        if (word in kPropertyConvertor) {
-          decorator.properties[word] = null;
-          currentPropertyName = word;
-        }
-      }
-      else {
-        const value = kPropertyConvertor[currentPropertyName](word);
-        if (currentPropertyName === "type" && decorator.type === null) {
-          decorator.type = value;
-          delete decorator.properties[currentPropertyName];
-        }
-        else {
-          decorator.properties[currentPropertyName] = value;
-        }
-
-        currentPropertyName = null;
-      }
-
-      continue;
-    }
-
-    if (token === Lexer.TOKENS.WORD) {
-      switch (decorator.name) {
-        case "Column":
-          decorator.type = word;
-          break;
-        case "Unique":
-          if (decorator.type === null) {
-            decorator.type = word;
-          }
-          else {
-            decorator.columns?.push(word);
-          }
-          break;
-        case "ManyToMany":
-        case "OneToOne":
-        case "ManyToOne":
-        case "OneToMany": {
-          const side = decorator.table ? "tableColumn" : "table";
-
-          decorator[side] = side === "table" ? word : word.split(".")[1];
-          break;
-        }
-      }
-    }
-    else if (token === Lexer.TOKENS.SYMBOL && word === "{") {
-      enteredInPropertyBlock = true;
-    }
+  const iter = Lexer.tokenize(lineStr);
+  const id = getNextItem(iter);
+  if (id === END_OF_SEQUENCE) {
+    throw new ParsingError("EOS");
+  }
+  if (id.token !== Lexer.TOKENS.IDENTIFIER) {
+    throw new ParsingError("EXPECT_ID", ", Decorator must always start with @.");
   }
 
-  if (decorator.type === null) {
-    delete decorator.type;
+  let decorator: TypeORMDecorator;
+  switch (id.raw) {
+    case "Unique":
+      decorator = Unique(iter);
+      break;
+    case "Column":
+      decorator = Column(iter);
+      break;
+    case "ManyToMany":
+    case "OneToOne":
+    case "ManyToOne":
+    case "OneToMany":
+      decorator = Relation(iter, id.raw);
+      break;
+    default:
+      decorator = { name: id.raw as any };
+      break;
   }
 
   return decorator;
