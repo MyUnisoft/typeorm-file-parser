@@ -16,10 +16,13 @@ export interface RelationDecorator {
 export default function Relation(iter: IterableIterator<TokenizerResult>, relationName: RelationKind): RelationDecorator {
   const table = getNextWord(iter);
   iter.next();
+  iter.next();
   const tableColumn = getNextWord(iter);
 
-  let properties: Properties = {};
+  iter.next();
   const propertyItem = getNextItem(iter);
+
+  let properties: Properties = {};
   if (propertyItem !== END_OF_SEQUENCE && propertyItem.token === TOKENS.SYMBOL && propertyItem.raw === "{") {
     properties = parseDecoratorProperties(iter);
   }

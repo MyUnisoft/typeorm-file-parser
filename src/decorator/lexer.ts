@@ -12,7 +12,7 @@ const kWordsChar = charSet(
   // A-Z
   [97, 122],
 
-  ".", "_", "-", "$"
+  ".", "_", "-", "$", " "
 );
 const kSymbolsChar = charSet(",", "{", "}", "[", "]");
 
@@ -20,13 +20,21 @@ export const IDENTIFIERS = new Set([
   "Entity",
   "Unique",
   "PrimaryGeneratedColumn",
+  "PrimaryColumn",
   "Column",
+  "Generated",
   "JoinTable",
   "JoinColumn",
   "ManyToMany",
   "OneToOne",
   "ManyToOne",
-  "OneToMany"
+  "OneToMany",
+  "CreateDateColumn",
+  "UpdateDateColumn",
+  "DeleteDateColumn",
+  "VersionColumn",
+  "Index",
+  "EntityRepository"
 ]);
 
 export const TOKENS = Object.freeze({
@@ -41,6 +49,10 @@ export function* tokenize(lineStr: string): IterableIterator<TokenizerResult> {
   let currentStr = "";
 
   for (const char of lineStr) {
+    if (char === " " && currentStr.length === 0) {
+      continue;
+    }
+
     if (kWordsChar.has(char)) {
       currentStr += char;
       continue;
@@ -51,7 +63,7 @@ export function* tokenize(lineStr: string): IterableIterator<TokenizerResult> {
         yield { token: TOKENS.IDENTIFIER, raw: currentStr };
       }
       else {
-        yield { token: TOKENS.WORD, raw: currentStr };
+        yield { token: TOKENS.WORD, raw: currentStr.trimRight() };
       }
       currentStr = "";
     }

@@ -3,18 +3,26 @@ import { TOKENS, TokenizerResult } from "../lexer";
 
 // CONSTANTS
 const kPropertyConvertor = {
+  type: (str) => str,
+  name: (str) => str,
   length: (str) => Number(str),
+  width: (str) => Number(str),
   precision: (str) => Number(str),
   scale: (str) => Number(str),
   default: (str) => str,
-  type: (str) => str,
   enum: (str) => str,
   onDelete: (str) => str,
   onUpdate: (str) => str,
+  charset: (str) => str,
+  referencedColumnName: (str) => str,
   nullable: (str) => str === "true",
   cascade: (str) => str === "true",
   array: (str) => str === "true",
-  unique: (str) => str === "true"
+  unique: (str) => str === "true",
+  insert: (str) => str === "true",
+  select: (str) => str === "true",
+  primary: (str) => str === "true",
+  comment: (str) => str
 };
 
 export type Properties = Record<string, string | boolean | number>;

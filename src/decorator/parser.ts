@@ -6,14 +6,12 @@ import { ParsingError } from "./errors";
 import Unique, { UniqueDecorator } from "./parsers/Unique";
 import Relation, { RelationDecorator } from "./parsers/Relation";
 import Column, { ColumnDecorator } from "./parsers/Column";
+import Join, { JoinDecorator } from "./parsers/Join";
 
-export type TypeORMDecorator =
-  { name: "Entity" | "PrimaryGeneratedColumn" } |
-  UniqueDecorator |
-  RelationDecorator |
-  ColumnDecorator;
+export type TypeORMDecoratorExtended = UniqueDecorator | RelationDecorator | ColumnDecorator | JoinDecorator;
+export type TypeORMDecoratorBase = { name: "Entity" | "PrimaryGeneratedColumn" } | TypeORMDecoratorExtended;
 
-export function parseDecorator(lineStr: string): TypeORMDecorator {
+export function parseDecorator(lineStr: string): TypeORMDecoratorBase {
   const iter = Lexer.tokenize(lineStr);
   const id = getNextItem(iter);
   if (id === END_OF_SEQUENCE) {
@@ -23,13 +21,19 @@ export function parseDecorator(lineStr: string): TypeORMDecorator {
     throw new ParsingError("EXPECT_ID", ", Decorator must always start with @.");
   }
 
-  let decorator: TypeORMDecorator;
+  let decorator: TypeORMDecoratorBase;
   switch (id.raw) {
     case "Unique":
       decorator = Unique(iter);
       break;
+    case "PrimaryColumn":
+    case "Generated":
     case "Column":
-      decorator = Column(iter);
+      decorator = Column(iter, id.raw);
+      break;
+    case "JoinColumn":
+    case "JoinTable":
+      decorator = Join(iter, id.raw);
       break;
     case "ManyToMany":
     case "OneToOne":
