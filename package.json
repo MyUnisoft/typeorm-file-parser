@@ -31,6 +31,9 @@
     "url": "https://github.com/MyUnisoft/typeorm-file-parser/issues"
   },
   "homepage": "https://github.com/MyUnisoft/typeorm-file-parser#readme",
+  "publishConfig": {
+    "@myunisoft:registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@myunisoft/eslint-config": "^1.4.0",
     "@types/jest": "^27.0.2",
