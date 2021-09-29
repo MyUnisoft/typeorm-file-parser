@@ -23,27 +23,32 @@ export function parseDecorator(lineStr: string): TypeORMDecoratorBase {
 
   let decorator: TypeORMDecoratorBase;
   switch (id.raw) {
-    case "Unique":
+    case "Unique": {
       decorator = Unique(iter);
       break;
+    }
     case "PrimaryColumn":
     case "Generated":
-    case "Column":
+    case "Column": {
       decorator = Column(iter, id.raw);
       break;
+    }
     case "JoinColumn":
-    case "JoinTable":
+    case "JoinTable": {
       decorator = Join(iter, id.raw);
       break;
+    }
     case "ManyToMany":
     case "OneToOne":
     case "ManyToOne":
-    case "OneToMany":
+    case "OneToMany": {
       decorator = Relation(iter, id.raw);
       break;
-    default:
+    }
+    default: {
       decorator = { name: id.raw as any };
       break;
+    }
   }
 
   return decorator;

@@ -17,6 +17,10 @@ export async function* lazyFetchFileDecorator(fileLocation: string) {
 
   for await (const line of rStream) {
     const trimedLine = line.trim() as string;
+    if (trimedLine.includes("export interface")) {
+      break;
+    }
+
     const isCommentLine = trimedLine.startsWith(kSlashChar);
     if (isCommentLine) {
       continue;
