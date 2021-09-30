@@ -2,7 +2,7 @@
 import { TOKENS, TokenizerResult } from "../lexer";
 
 // CONSTANTS
-const kPropertyConvertor = {
+export const PROPERTIES_CONVERTOR = {
   type: (str) => str,
   name: (str) => str,
   length: (str) => Number(str),
@@ -37,13 +37,13 @@ export function parseDecoratorProperties(iter: IterableIterator<TokenizerResult>
     }
 
     if (currentPropertyName === null) {
-      if (word in kPropertyConvertor) {
+      if (word in PROPERTIES_CONVERTOR) {
         result[word] = null;
         currentPropertyName = word;
       }
     }
     else {
-      result[currentPropertyName] = kPropertyConvertor[currentPropertyName](word);
+      result[currentPropertyName] = PROPERTIES_CONVERTOR[currentPropertyName](word);
       currentPropertyName = null;
     }
   }

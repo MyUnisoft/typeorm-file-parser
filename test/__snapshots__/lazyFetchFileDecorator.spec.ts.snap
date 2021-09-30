@@ -1,0 +1,277 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lazyFetchFileDecorator should fetch all properties and decorators from GiArticle: GiArticleFixture 1`] = `
+Array [
+  Object {
+    "name": "Entity",
+  },
+  Object {
+    "columns": Array [
+      "reference",
+    ],
+    "constraintName": "GiArticle_reference",
+    "name": "Unique",
+  },
+  Object {
+    "name": "PrimaryGeneratedColumn",
+  },
+  Array [
+    "id",
+    "number",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "length": 50,
+    },
+    "type": "varchar",
+  },
+  Array [
+    "name",
+    "string",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "length": 6,
+    },
+    "type": "varchar",
+  },
+  Array [
+    "reference",
+    "string",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "nullable": true,
+    },
+    "type": "text",
+  },
+  Array [
+    "note",
+    "string",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "enum": "giTypeArticle",
+    },
+    "type": "enum",
+  },
+  Array [
+    "type",
+    "giTypeArticle",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "enum": "periodicity",
+    },
+    "type": "enum",
+  },
+  Array [
+    "periodicity",
+    "periodicity",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {},
+    "type": "boolean",
+  },
+  Array [
+    "mandatoryArticle",
+    "boolean",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "enum": "giExercice",
+    },
+    "type": "enum",
+  },
+  Array [
+    "exercice",
+    "string",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {},
+    "type": "smallint",
+  },
+  Array [
+    "firstDeadline",
+    "number",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "length": 6,
+    },
+    "type": "varchar",
+  },
+  Array [
+    "firmAccount",
+    "number",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "length": 6,
+    },
+    "type": "varchar",
+  },
+  Array [
+    "firmCollectedVat",
+    "string",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "length": 6,
+    },
+    "type": "varchar",
+  },
+  Array [
+    "clientAccount",
+    "string",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "length": 6,
+    },
+    "type": "varchar",
+  },
+  Array [
+    "clientDeductibleVat",
+    "string",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "default": "false",
+    },
+    "type": "boolean",
+  },
+  Array [
+    "billed",
+    "boolean",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "default": "false",
+    },
+    "type": "boolean",
+  },
+  Array [
+    "archived",
+    "boolean",
+  ],
+  Object {
+    "name": "Column",
+    "properties": Object {
+      "enum": "giAmount",
+    },
+    "type": "enum",
+  },
+  Array [
+    "amount",
+    "giAmount",
+  ],
+  Object {
+    "name": "ManyToMany",
+    "properties": Object {},
+    "table": "GiMission",
+    "tableColumn": "articles",
+  },
+  Object {
+    "name": "JoinTable",
+    "properties": Object {
+      "name": "gi_articles_missions",
+    },
+  },
+  Array [
+    "missions",
+    "GiMission",
+  ],
+  Object {
+    "name": "OneToOne",
+    "properties": Object {},
+    "table": "GiArticle",
+    "tableColumn": "id",
+  },
+  Object {
+    "name": "JoinColumn",
+    "properties": Object {
+      "name": "account_article_id",
+    },
+  },
+  Array [
+    "accountArticle",
+    "GiArticle",
+  ],
+  Object {
+    "name": "ManyToOne",
+    "properties": Object {
+      "cascade": true,
+      "nullable": false,
+    },
+    "table": "WorkUnit",
+    "tableColumn": "articles",
+  },
+  Array [
+    "workUnit",
+    "WorkUnit",
+  ],
+  Object {
+    "name": "ManyToOne",
+    "properties": Object {
+      "nullable": false,
+    },
+    "table": "Vat",
+    "tableColumn": "giArticlesFirm",
+  },
+  Object {
+    "name": "JoinColumn",
+    "properties": Object {
+      "name": "firm_vat_id",
+    },
+  },
+  Array [
+    "firmVat",
+    "Vat",
+  ],
+  Object {
+    "name": "ManyToOne",
+    "properties": Object {
+      "nullable": false,
+    },
+    "table": "Vat",
+    "tableColumn": "giArticlesClient",
+  },
+  Object {
+    "name": "JoinColumn",
+    "properties": Object {
+      "name": "client_vat_id",
+    },
+  },
+  Array [
+    "clientVat",
+    "Vat",
+  ],
+  Object {
+    "name": "OneToMany",
+    "properties": Object {
+      "cascade": true,
+    },
+    "table": "GiVintage",
+    "tableColumn": "article",
+  },
+  Array [
+    "vintages",
+    "GiVintage",
+  ],
+]
+`;

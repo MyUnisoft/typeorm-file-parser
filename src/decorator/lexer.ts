@@ -45,6 +45,15 @@ export const TOKENS = Object.freeze({
 
 export type TokenizerResult = { token: symbol, raw: string };
 
+function* analyzeStringPattern(currentStr: string): IterableIterator<TokenizerResult> {
+  if (IDENTIFIERS.has(currentStr)) {
+    yield { token: TOKENS.IDENTIFIER, raw: currentStr };
+  }
+  else {
+    yield { token: TOKENS.WORD, raw: currentStr.trimRight() };
+  }
+}
+
 export function* tokenize(lineStr: string): IterableIterator<TokenizerResult> {
   let currentStr = "";
 
@@ -59,17 +68,16 @@ export function* tokenize(lineStr: string): IterableIterator<TokenizerResult> {
     }
 
     if (currentStr.length > 0) {
-      if (IDENTIFIERS.has(currentStr)) {
-        yield { token: TOKENS.IDENTIFIER, raw: currentStr };
-      }
-      else {
-        yield { token: TOKENS.WORD, raw: currentStr.trimRight() };
-      }
+      yield* analyzeStringPattern(currentStr);
       currentStr = "";
     }
 
     if (kSymbolsChar.has(char)) {
       yield { token: TOKENS.SYMBOL, raw: char };
     }
+  }
+
+  if (currentStr.length > 0) {
+    yield* analyzeStringPattern(currentStr);
   }
 }

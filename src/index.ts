@@ -27,7 +27,7 @@ export async function* lazyFetchFileDecorator(fileLocation: string) {
     }
 
     const fieldLineResult = /^([a-zA-Z0-9_]+)\s*:\s*([a-zA-Z]+)/g.exec(trimedLine);
-    if (fieldLineResult !== null) {
+    if (pastConcat === null && fieldLineResult !== null) {
       const [, name, value] = fieldLineResult;
       yield [name, value];
 

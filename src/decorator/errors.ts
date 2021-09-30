@@ -4,7 +4,8 @@ import ExtendableError from "es6-error";
 export const ParsingCodes = Object.freeze({
   EOS: "Abnormal end of sequence detected",
   EXPECT_ID: "Expected an IDENTIFIER",
-  EXPECT_WORD: "Expected a WORD"
+  EXPECT_WORD: "Expected a WORD",
+  EXPECT_PROPERTIES: "Expected properties"
 });
 
 export type KeyCode = keyof typeof ParsingCodes;

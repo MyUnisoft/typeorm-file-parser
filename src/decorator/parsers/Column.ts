@@ -1,7 +1,6 @@
 // Import Internal Dependencies
 import { TOKENS, TokenizerResult } from "../lexer";
 import { getNextItem, END_OF_SEQUENCE } from "../../utils";
-import { ParsingError } from "../errors";
 import { parseDecoratorProperties, Properties } from "./Properties";
 
 export type ColumnKind = "PrimaryColumn" | "Column" | "Generated";
@@ -17,24 +16,23 @@ export default function Column(iter: IterableIterator<TokenizerResult>, name: Co
   let properties: Properties = {};
 
   const item = getNextItem(iter);
-  if (item === END_OF_SEQUENCE) {
-    throw new ParsingError("EOS");
-  }
-  const isWord = item.token === TOKENS.WORD;
-  if (isWord) {
-    type = item.raw;
-    iter.next();
-  }
+  if (item !== END_OF_SEQUENCE) {
+    const isWord = item.token === TOKENS.WORD;
+    if (isWord) {
+      type = item.raw;
+      iter.next();
+    }
 
-  const propertyItem = isWord ? getNextItem(iter) : item;
-  if (propertyItem !== END_OF_SEQUENCE && propertyItem.token === TOKENS.SYMBOL && propertyItem.raw === "{") {
-    properties = parseDecoratorProperties(iter);
-  }
+    const propertyItem = isWord ? getNextItem(iter) : item;
+    if (propertyItem !== END_OF_SEQUENCE && propertyItem.token === TOKENS.SYMBOL && propertyItem.raw === "{") {
+      properties = parseDecoratorProperties(iter);
+    }
 
-  // Asign column type from properties
-  if (type === "" && "type" in properties) {
-    type = properties.type as string;
-    delete properties.type;
+    // Asign column type from properties
+    if (type === "" && "type" in properties) {
+      type = properties.type as string;
+      delete properties.type;
+    }
   }
 
   return {

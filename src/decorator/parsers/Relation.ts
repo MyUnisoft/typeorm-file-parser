@@ -19,6 +19,7 @@ export default function Relation(iter: IterableIterator<TokenizerResult>, relati
   iter.next();
   const tableColumn = getNextWord(iter);
 
+  // TODO: support destructuration ?
   iter.next();
   const propertyItem = getNextItem(iter);
 
