@@ -35,7 +35,7 @@
     "@myunisoft:registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@myunisoft/eslint-config": "^1.4.0",
+    "@nodesecure/eslint-config": "^1.2.0",
     "@slimio/is": "^1.5.1",
     "@types/jest": "^27.0.2",
     "dotenv": "^10.0.0",
