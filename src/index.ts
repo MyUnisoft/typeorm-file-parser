@@ -62,12 +62,18 @@ function removeDecoratorName(decorator: TypeORMDecoratorBase): DecoratorExWithou
 }
 
 export interface TypeORMProperty {
+  /** TypeScript/JavaScript type */
   type: string;
+
+  /** TypeScript (TypeORM) decorators attached to the property */
   decorators: Record<string, TypeORMDecoratorBase>;
 }
 
 export interface ParsedTypeORMResult {
+  /** Entity Unique decorator (without root name property) */
   unique?: DecoratorExWithoutName;
+
+  /** Entity properties as a plainObject */
   properties: Record<string, TypeORMProperty>;
 }
 

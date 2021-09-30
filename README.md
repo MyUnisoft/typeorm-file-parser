@@ -26,10 +26,64 @@ $ yarn add @myunisoft/typeorm-file-parser
 ## 📚 Usage example
 
 ```ts
+import { fileURLToPath } from "url";
+import path from "path";
+
 import * as TypeORMFileParser from "@myunisoft/typeorm-file-parser";
 
-const result = await TypeORMFileParser.readFile("./myEntiyFile.ts");
+// CONSTANTS
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const result = await TypeORMFileParser.readFile(
+  path.join(__dirname, "EntityFile.ts")
+);
 console.log(result);
+```
+
+It will return an Object like the following one
+```js
+{
+  "properties": {
+    "id": {
+      "type": "number",
+      "decorators": {
+        "PrimaryGeneratedColumn": {
+          "name": "PrimaryGeneratedColumn"
+        }
+      }
+    },
+    "note": {
+      "type": "string",
+      "decorators": {
+        "Column": {
+          "name": "Column",
+          "type": "text",
+          "properties": {
+            "nullable": true
+          }
+        }
+      }
+    },
+    "billed": {
+      "type": "boolean",
+      "decorators": {
+        "Column": {
+          "name": "Column",
+          "type": "boolean",
+          "properties": {
+            "default": "false"
+          }
+        }
+      }
+    }
+  },
+  "unique": {
+    "constraintName": "GiArticle_reference",
+    "columns": [
+      "reference"
+    ]
+  }
+}
 ```
 
 ## 📜 API
@@ -38,12 +92,18 @@ The response of the readFile method is described by the following interfaces:
 
 ```ts
 export interface TypeORMProperty {
+  /** TypeScript/JavaScript type */
   type: string;
+
+  /** TypeScript (TypeORM) decorators attached to the property */
   decorators: Record<string, TypeORMDecoratorBase>;
 }
 
 export interface ParsedTypeORMResult {
+  /** Entity Unique decorator (without root name property) */
   unique?: DecoratorExWithoutName;
+
+  /** Entity properties as a plainObject */
   properties: Record<string, TypeORMProperty>;
 }
 ```
@@ -51,8 +111,71 @@ export interface ParsedTypeORMResult {
 `TypeORMDecoratorBase` is a composition of multiple types
 
 ```ts
-export type TypeORMDecoratorExtended = UniqueDecorator | RelationDecorator | ColumnDecorator | JoinDecorator;
-export type TypeORMDecoratorBase = { name: "Entity" | "PrimaryGeneratedColumn" } | TypeORMDecoratorExtended;
+export type TypeORMDecoratorExtended =
+  UniqueDecorator |
+  RelationDecorator |
+  ColumnDecorator |
+  JoinDecorator;
+
+export type TypeORMDecoratorBase =
+  { name: "Entity" | "PrimaryGeneratedColumn" } |
+  TypeORMDecoratorExtended;
 ```
 
 Each of them can be found in `./src/decorator/parsers`
+
+<details>
+<summary>UniqueDecorator</summary>
+
+```ts
+export interface UniqueDecorator {
+  name: "Unique";
+  constraintName: string | null;
+  columns: string[];
+}
+```
+
+</details>
+
+<details>
+<summary>RelationDecorator</summary>
+
+```ts
+export interface RelationDecorator {
+  name: RelationKind;
+  table: string;
+  tableColumn: string;
+  properties: Properties;
+}
+```
+
+</details>
+
+<details>
+<summary>ColumnDecorator</summary>
+
+```ts
+export type ColumnKind = "PrimaryColumn" | "Column" | "Generated";
+
+export interface ColumnDecorator {
+  name: ColumnKind;
+  type: string;
+  properties: Properties;
+}
+```
+
+</details>
+
+<details>
+<summary>JoinDecorator</summary>
+
+```ts
+export type JoinKind = "JoinTable" | "JoinColumn";
+
+export interface JoinDecorator {
+  name: JoinKind;
+  properties: Properties;
+}
+```
+
+</details>
