@@ -5,7 +5,10 @@ import { createReadStream } from "fs";
 import split2 from "split2";
 
 // Import Internal Dependencies
-import { parseDecorator, TypeORMDecoratorBase, TypeORMDecoratorExtended } from "./decorator/parser";
+import { IdentifiersName } from "./decorator/lexer";
+import {
+  parseDecorator, TypeORMDecoratorBase, TypeORMDecoratorExtended
+} from "./decorator/parser";
 
 // CONSTANTS
 const kArrobaseChar = "@";
@@ -61,12 +64,14 @@ function removeDecoratorName(decorator: TypeORMDecoratorBase): DecoratorExWithou
   return otherProperties;
 }
 
+export { IdentifiersName };
+
 export interface TypeORMProperty {
   /** TypeScript/JavaScript type */
   type: string;
 
   /** TypeScript (TypeORM) decorators attached to the property */
-  decorators: Record<string, TypeORMDecoratorBase>;
+  decorators: Record<IdentifiersName, TypeORMDecoratorBase>;
 }
 
 export interface ParsedTypeORMResult {
@@ -88,7 +93,7 @@ export async function readFile(fileLocation: string): Promise<ParsedTypeORMResul
 
   for await (const decorator of asyncIter) {
     if (Array.isArray(decorator)) {
-      const decorators = {};
+      const decorators = Object.create(null);
       for (const decorator of memoryColumns) {
         decorators[decorator.name] = decorator;
       }

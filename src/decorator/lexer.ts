@@ -37,6 +37,26 @@ export const IDENTIFIERS = new Set([
   "EntityRepository"
 ]);
 
+export type IdentifiersName =
+  "Entity" |
+  "Unique" |
+  "PrimaryGeneratedColumn" |
+  "PrimaryColumn" |
+  "Column" |
+  "Generated" |
+  "JoinTable" |
+  "JoinColumn" |
+  "ManyToMany" |
+  "OneToOne" |
+  "ManyToOne" |
+  "OneToMany" |
+  "CreateDateColumn" |
+  "UpdateDateColumn" |
+  "DeleteDateColumn" |
+  "VersionColumn" |
+  "Index" |
+  "EntityRepository";
+
 export const TOKENS = Object.freeze({
   IDENTIFIER: Symbol("IDENTIFIER"),
   WORD: Symbol("WORD"),
