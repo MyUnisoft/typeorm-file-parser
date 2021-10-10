@@ -14,6 +14,10 @@ import {
 const kArrobaseChar = "@";
 const kSlashChar = "/";
 
+export type DecoratorExWithoutName = Omit<TypeORMDecoratorExtended, "name">;
+
+export { IdentifiersName };
+
 export async function* lazyFetchFileDecorator(fileLocation: string) {
   const rStream = createReadStream(fileLocation).pipe(split2());
   let pastConcat: string | null = null;
@@ -52,19 +56,12 @@ export async function* lazyFetchFileDecorator(fileLocation: string) {
   }
 }
 
-type DecoratorExWithoutName = Omit<TypeORMDecoratorExtended, "name"> | string;
-
 function removeDecoratorName(decorator: TypeORMDecoratorBase): DecoratorExWithoutName {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { name, ...otherProperties } = decorator;
-  if (Object.keys(otherProperties).length === 0) {
-    return name;
-  }
 
   return otherProperties;
 }
-
-export { IdentifiersName };
 
 export interface TypeORMProperty {
   /** TypeScript/JavaScript type */

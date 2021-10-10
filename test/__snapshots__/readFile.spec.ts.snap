@@ -1,0 +1,297 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`readFile should be able to read GiArticle 1`] = `
+Object {
+  "properties": Object {
+    "accountArticle": Object {
+      "decorators": Object {
+        "JoinColumn": Object {
+          "name": "JoinColumn",
+          "properties": Object {
+            "name": "account_article_id",
+          },
+        },
+        "OneToOne": Object {
+          "name": "OneToOne",
+          "properties": Object {},
+          "table": "GiArticle",
+          "tableColumn": "id",
+        },
+      },
+      "type": "GiArticle",
+    },
+    "amount": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "enum": "giAmount",
+          },
+          "type": "enum",
+        },
+      },
+      "type": "giAmount",
+    },
+    "archived": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "default": "false",
+          },
+          "type": "boolean",
+        },
+      },
+      "type": "boolean",
+    },
+    "billed": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "default": "false",
+          },
+          "type": "boolean",
+        },
+      },
+      "type": "boolean",
+    },
+    "clientAccount": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "length": 6,
+          },
+          "type": "varchar",
+        },
+      },
+      "type": "string",
+    },
+    "clientDeductibleVat": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "length": 6,
+          },
+          "type": "varchar",
+        },
+      },
+      "type": "string",
+    },
+    "clientVat": Object {
+      "decorators": Object {
+        "JoinColumn": Object {
+          "name": "JoinColumn",
+          "properties": Object {
+            "name": "client_vat_id",
+          },
+        },
+        "ManyToOne": Object {
+          "name": "ManyToOne",
+          "properties": Object {
+            "nullable": false,
+          },
+          "table": "Vat",
+          "tableColumn": "giArticlesClient",
+        },
+      },
+      "type": "Vat",
+    },
+    "exercice": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "enum": "giExercice",
+          },
+          "type": "enum",
+        },
+      },
+      "type": "string",
+    },
+    "firmAccount": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "length": 6,
+          },
+          "type": "varchar",
+        },
+      },
+      "type": "number",
+    },
+    "firmCollectedVat": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "length": 6,
+          },
+          "type": "varchar",
+        },
+      },
+      "type": "string",
+    },
+    "firmVat": Object {
+      "decorators": Object {
+        "JoinColumn": Object {
+          "name": "JoinColumn",
+          "properties": Object {
+            "name": "firm_vat_id",
+          },
+        },
+        "ManyToOne": Object {
+          "name": "ManyToOne",
+          "properties": Object {
+            "nullable": false,
+          },
+          "table": "Vat",
+          "tableColumn": "giArticlesFirm",
+        },
+      },
+      "type": "Vat",
+    },
+    "firstDeadline": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {},
+          "type": "smallint",
+        },
+      },
+      "type": "number",
+    },
+    "id": Object {
+      "decorators": Object {
+        "PrimaryGeneratedColumn": Object {
+          "name": "PrimaryGeneratedColumn",
+        },
+      },
+      "type": "number",
+    },
+    "mandatoryArticle": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {},
+          "type": "boolean",
+        },
+      },
+      "type": "boolean",
+    },
+    "missions": Object {
+      "decorators": Object {
+        "JoinTable": Object {
+          "name": "JoinTable",
+          "properties": Object {
+            "name": "gi_articles_missions",
+          },
+        },
+        "ManyToMany": Object {
+          "name": "ManyToMany",
+          "properties": Object {},
+          "table": "GiMission",
+          "tableColumn": "articles",
+        },
+      },
+      "type": "GiMission",
+    },
+    "name": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "length": 50,
+          },
+          "type": "varchar",
+        },
+      },
+      "type": "string",
+    },
+    "note": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "nullable": true,
+          },
+          "type": "text",
+        },
+      },
+      "type": "string",
+    },
+    "periodicity": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "enum": "periodicity",
+          },
+          "type": "enum",
+        },
+      },
+      "type": "periodicity",
+    },
+    "reference": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "length": 6,
+          },
+          "type": "varchar",
+        },
+      },
+      "type": "string",
+    },
+    "type": Object {
+      "decorators": Object {
+        "Column": Object {
+          "name": "Column",
+          "properties": Object {
+            "enum": "giTypeArticle",
+          },
+          "type": "enum",
+        },
+      },
+      "type": "giTypeArticle",
+    },
+    "vintages": Object {
+      "decorators": Object {
+        "OneToMany": Object {
+          "name": "OneToMany",
+          "properties": Object {
+            "cascade": true,
+          },
+          "table": "GiVintage",
+          "tableColumn": "article",
+        },
+      },
+      "type": "GiVintage",
+    },
+    "workUnit": Object {
+      "decorators": Object {
+        "ManyToOne": Object {
+          "name": "ManyToOne",
+          "properties": Object {
+            "cascade": true,
+            "nullable": false,
+          },
+          "table": "WorkUnit",
+          "tableColumn": "articles",
+        },
+      },
+      "type": "WorkUnit",
+    },
+  },
+  "unique": Object {
+    "columns": Array [
+      "reference",
+    ],
+    "constraintName": "GiArticle_reference",
+  },
+}
+`;

@@ -31,7 +31,7 @@ export default function Relation(iter: IterableIterator<TokenizerResult>, relati
   return {
     name: relationName,
     table,
-    tableColumn: tableColumn.includes(".") ? tableColumn.split(".")[1] : tableColumn,
+    tableColumn: tableColumn.split(".")[1],
     properties
   };
 }
