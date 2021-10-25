@@ -8,6 +8,8 @@ import Relation, { RelationDecorator } from "./parsers/Relation";
 import Column, { ColumnDecorator } from "./parsers/Column";
 import Join, { JoinDecorator } from "./parsers/Join";
 
+export { UniqueDecorator, RelationDecorator, ColumnDecorator, JoinDecorator };
+
 export type TypeORMDecoratorExtended = UniqueDecorator | RelationDecorator | ColumnDecorator | JoinDecorator;
 export type TypeORMDecoratorBase = { name: "Entity" | "PrimaryGeneratedColumn" } | TypeORMDecoratorExtended;
 

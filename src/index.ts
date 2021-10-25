@@ -7,7 +7,8 @@ import split2 from "split2";
 // Import Internal Dependencies
 import { IdentifiersName } from "./decorator/lexer";
 import {
-  parseDecorator, TypeORMDecoratorBase, TypeORMDecoratorExtended
+  parseDecorator, TypeORMDecoratorBase, TypeORMDecoratorExtended,
+  UniqueDecorator, RelationDecorator, ColumnDecorator, JoinDecorator
 } from "./decorator/parser";
 
 // CONSTANTS
@@ -16,7 +17,7 @@ const kSlashChar = "/";
 
 export type DecoratorExWithoutName = Omit<TypeORMDecoratorExtended, "name">;
 
-export { IdentifiersName };
+export { IdentifiersName, UniqueDecorator, RelationDecorator, ColumnDecorator, JoinDecorator };
 
 export async function* lazyFetchFileDecorator(fileLocation: string) {
   const rStream = createReadStream(fileLocation).pipe(split2());
