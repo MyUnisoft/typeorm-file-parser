@@ -1,6 +1,6 @@
 {
   "name": "@myunisoft/typeorm-file-parser",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "TypeORM TypeScript file parser",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
