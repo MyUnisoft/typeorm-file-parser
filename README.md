@@ -11,7 +11,6 @@
     <a href="https://github.com/MyUnisoft/typeorm-file-parser"><img src="https://img.shields.io/github/package-json/v/MyUnisoft/typeorm-file-parser?style=flat-square" alt="npm version"></a>
     <a href="https://github.com/MyUnisoft/typeorm-file-parser"><img src="https://img.shields.io/github/license/MyUnisoft/typeorm-file-parser?style=flat-square" alt="license"></a>
     <a href="https://github.com/MyUnisoft/typeorm-file-parser"><img src="https://img.shields.io/github/languages/code-size/MyUnisoft/typeorm-file-parser?style=flat-square" alt="size"></a>
-    <a href="./SECURITY.md"><img src="https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg?style=flat-square" alt="Responsible Disclosure Policy" /></a>
 </p>
 
 ## 📢 About
