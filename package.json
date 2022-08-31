@@ -46,6 +46,6 @@
   },
   "dependencies": {
     "es6-error": "^4.1.1",
-    "split2": "^3.2.2"
+    "split2": "^4.1.0"
   }
 }
