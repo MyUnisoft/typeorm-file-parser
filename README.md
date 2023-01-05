@@ -14,6 +14,9 @@
     <a href="https://github.com/MyUnisoft/typeorm-file-parser">
       <img src="https://img.shields.io/github/license/MyUnisoft/typeorm-file-parser?style=flat-square" alt="license">
     </a>
+    <a href="https://api.securityscorecards.dev/projects/github.com/MyUnisoft/typeorm-file-parser">
+      <img src="https://api.securityscorecards.dev/projects/github.com/MyUnisoft/typeorm-file-parser/badge" alt="ossf scorecard">
+    </a>
     <a href="https://github.com/MyUnisoft/typeorm-file-parser/actions?query=workflow%3A%22Node.js+CI%22">
       <img src="https://img.shields.io/github/actions/workflow/status/MyUnisoft/typeorm-file-parser/main.yml">
     </a>
