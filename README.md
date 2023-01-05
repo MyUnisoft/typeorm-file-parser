@@ -8,9 +8,18 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/MyUnisoft/typeorm-file-parser"><img src="https://img.shields.io/github/package-json/v/MyUnisoft/typeorm-file-parser?style=flat-square" alt="npm version"></a>
-    <a href="https://github.com/MyUnisoft/typeorm-file-parser"><img src="https://img.shields.io/github/license/MyUnisoft/typeorm-file-parser?style=flat-square" alt="license"></a>
-    <a href="https://github.com/MyUnisoft/typeorm-file-parser"><img src="https://img.shields.io/github/languages/code-size/MyUnisoft/typeorm-file-parser?style=flat-square" alt="size"></a>
+    <a href="https://github.com/MyUnisoft/typeorm-file-parser">
+      <img src="https://img.shields.io/github/package-json/v/MyUnisoft/typeorm-file-parser?style=flat-square" alt="npm version">
+    </a>
+    <a href="https://github.com/MyUnisoft/typeorm-file-parser">
+      <img src="https://img.shields.io/github/license/MyUnisoft/typeorm-file-parser?style=flat-square" alt="license">
+    </a>
+    <a href="https://github.com/MyUnisoft/typeorm-file-parser/actions?query=workflow%3A%22Node.js+CI%22">
+      <img src="https://img.shields.io/github/actions/workflow/status/MyUnisoft/typeorm-file-parser/main.yml">
+    </a>
+    <a href="https://github.com/MyUnisoft/typeorm-file-parser">
+      <img src="https://img.shields.io/github/languages/code-size/MyUnisoft/typeorm-file-parser?style=flat-square" alt="size">
+    </a>
 </p>
 
 ## 📢 About
